@@ -23,14 +23,52 @@ using namespace std;
 // Randomize the order of all items in the list
 //-----------------------------------------------------------------------------
 void randomize_list(string_vector & strings) {
-  // TODO: implement this function, then delete this comment
+
+	srand(time(0));
+	int random_number;
+
+	for (size_t i = 0; i < strings.size(); i++)
+	{
+		random_number = (rand() % strings.size());
+		swap(strings[i], strings[random_number]);
+	}
+
   return;
 }
 
 //-----------------------------------------------------------------------------
 void merge(string_vector & strings, size_t start, size_t mid, size_t end) {
-  // TODO: implement this function, then delete this comment
-  return;
+  
+	size_t i = start;
+	size_t j = mid + 1;
+	string_vector temp;
+	
+	if (mid < end && strings[mid] <= strings[mid + 1]) {
+		return;
+	}
+	
+	while (i <= mid && j <= end) {
+		if (strings[i] > strings[j]) {
+			temp.push_back(strings[j++]);
+		}
+		else {
+			temp.push_back(strings[i++]);
+		}
+	}
+
+	while (i <= mid) {
+		temp.push_back(strings[i++]);
+	}
+
+	while (j <= end) {
+		temp.push_back(strings[j++]);
+	}
+
+	for (int i = 0; i < temp.size(); i++) {
+		strings[start + i] = temp[i];
+	}
+
+	return;
 }
 
 //-----------------------------------------------------------------------------
@@ -40,7 +78,18 @@ void merge(string_vector & strings, size_t start, size_t mid, size_t end) {
 // the two parts together using the merge() method.
 //-----------------------------------------------------------------------------
 void mergesort(string_vector & strings, size_t start, size_t end) {
-  // TODO: implement this function, then delete this comment
+
+	//pick center then split left side and right side 
+	size_t mid;
+
+	if (start < end) {
+		mid = (start + end) / 2;
+
+		mergesort(strings, start, mid);
+		mergesort(strings, mid + 1, end);
+
+		merge(strings, start, mid, end);
+	}
   return;
 }
 
@@ -51,8 +100,29 @@ void mergesort(string_vector & strings, size_t start, size_t end) {
 // It returns the index of the final position of the pivot value.
 //-----------------------------------------------------------------------------
 int hoare_partition(string_vector & strings, int start, int end) {
-  // TODO: implement this function, then delete this comment
-  return 0;
+	
+	string pivot = strings[start];
+	int i = start - 1;
+	int j = end + 1;
+
+	do {
+		do {
+			i = i + 1;
+		} while (strings[i] < pivot );
+
+		do
+		{
+			j = j - 1;
+		} while (strings[j] > pivot);
+
+		swap(strings[i], strings[j]);
+
+	} while (i < j);
+
+	swap(strings[i], strings[j]);
+	swap(strings[start], strings[j]);
+
+  return j;
 }
 
 //-----------------------------------------------------------------------------
@@ -62,7 +132,13 @@ int hoare_partition(string_vector & strings, int start, int end) {
 // the two parts together using the merge() method.
 //-----------------------------------------------------------------------------
 void quicksort(string_vector & strings, int start, int end) {
-  // TODO: implement this function, then delete this comment
+  
+	if (start < end) {
+		int s = hoare_partition(strings, start, end);
+		quicksort(strings, start, s - 1);
+		quicksort(strings, s + 1, end);
+	}
+
   return;
 }
 
