@@ -2,6 +2,6 @@
 
 Group members:
 
-Ada Lovelace adalovelace@csu.fullerton.edu
+Ian Michael Jesu Alvarez ian_alvarez23@csu.fullerton.edu
 
-Charles Babbage charlesbab@csu.fullerton.edu
+Francis Nguyen lqtruongnguyen@csu.fullerton.edu
