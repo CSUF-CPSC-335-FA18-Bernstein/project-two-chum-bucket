@@ -15,6 +15,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -100,26 +101,39 @@ void mergesort(string_vector & strings, size_t start, size_t end) {
 // It returns the index of the final position of the pivot value.
 //-----------------------------------------------------------------------------
 int hoare_partition(string_vector & strings, int start, int end) {
-	
-	string pivot = strings[start];
+
 	int i = start;
 	int j = end;
 
-
+	string pivot = strings[start];
 
 	while (i < j) {
 
-		while (i < j && strings[j] >= pivot)
+		while (pivot < strings[j] && j > i) {
 			j--;
+		}
 
 		swap(strings[i], strings[j]);
 
-		while (i < j && strings[i] <= pivot)
+		while (pivot >= strings[i] && i < j) {
 			i++;
-
+		}
 		swap(strings[j], strings[i]);
 	}
 	return i;
+	
+	//string pivot = strings[start];
+	//int i = (start - 1);
+
+	//for (int j = start; j <= end - 1; j++) {
+	//	if (strings[j] <= pivot)
+	//	{
+	//		i++;
+	//		swap(strings[i], strings[j]);
+	//	}
+	//}
+	//swap(strings[i + 1], strings[end]);
+	//return i + 1;
 }
 
 //-----------------------------------------------------------------------------
@@ -133,7 +147,7 @@ void quicksort(string_vector & strings, int start, int end) {
 	int pivot;
 	if (start < end) {
 		pivot = hoare_partition(strings, start, end);
-		quicksort(strings, start, pivot);
+		quicksort(strings, start, pivot - 1);
 		quicksort(strings, pivot + 1, end);
 	}
 	return;
