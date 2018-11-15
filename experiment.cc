@@ -11,6 +11,7 @@
 
 #include "project2.hh"
 #include "timer.hh"
+#include <vector>
 
 using namespace std;
 
@@ -22,17 +23,25 @@ int main() {
     return 1;
   }
 
-  int n = 1000;
-  string_vector n_words(all_words.begin(), all_words.begin() + n);
 
-  randomize_list(n_words);
 
-  Timer timer;
-  mergesort(n_words);
-  double elapsed = timer.elapsed();
-  cout << "mergesort, "
-       << "n=" << n << ", "
-       << "elapsed time = " << elapsed << " seconds" << endl;
+  int n = 99171;
+  for (size_t i = 0; i < 100; i++)
+  {
+		string_vector n_words(all_words.begin(), all_words.begin() + n);
+
+		randomize_list(n_words);
+
+		Timer timer;
+		quicksort(n_words);
+		/*quicksort(n_words);*/
+		double elapsed = timer.elapsed();
+
+		cout << "quicksort, "
+			<< "n=" << n << ", "
+			<< "elapsed time = " << elapsed << " seconds" << endl;
+  }
+  
 
   return 0;
 }
