@@ -12,6 +12,7 @@
 #include "project2.hh"
 #include "timer.hh"
 #include <vector>
+#include <fstream>
 
 using namespace std;
 
@@ -23,25 +24,28 @@ int main() {
     return 1;
   }
 
-
+  ofstream fout;
+  fout.open("mergesortData.txt");
 
   int n = 99171;
-  for (size_t i = 0; i < 100; i++)
+  for (size_t i = 0; i < 300; i++)
   {
 		string_vector n_words(all_words.begin(), all_words.begin() + n);
 
 		randomize_list(n_words);
 
 		Timer timer;
-		quicksort(n_words);
+		mergesort(n_words);
 		/*quicksort(n_words);*/
 		double elapsed = timer.elapsed();
 
 		cout << "quicksort, "
 			<< "n=" << n << ", "
 			<< "elapsed time = " << elapsed << " seconds" << endl;
+		fout << elapsed << endl;
   }
   
+
 
   return 0;
 }
