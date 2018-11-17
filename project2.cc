@@ -121,19 +121,7 @@ int hoare_partition(string_vector & strings, int start, int end) {
 		swap(strings[j], strings[i]);
 	}
 	return i;
-	
-	//string pivot = strings[start];
-	//int i = (start - 1);
 
-	//for (int j = start; j <= end - 1; j++) {
-	//	if (strings[j] <= pivot)
-	//	{
-	//		i++;
-	//		swap(strings[i], strings[j]);
-	//	}
-	//}
-	//swap(strings[i + 1], strings[end]);
-	//return i + 1;
 }
 
 //-----------------------------------------------------------------------------
@@ -167,24 +155,29 @@ void quicksort(string_vector & strings, int start, int end) {
 //-----------------------------------------------------------------------------
 bool load_words(string_vector& words, const std::string& path) 
 {
-  //std::cout << "Loading words from [" << path << "]" << std::endl;
   words.clear();
+
   std::ifstream ifs(path.c_str());
+
   if (!ifs.is_open() || !ifs.good()) {
-    //cout << "Failed to open [" << path << "]" << std::endl;
+  
     return false;
+
   }
   int countWordsLoaded = 0;
   while (!ifs.eof()) {
+
     std::string lineBuffer;
+
     std::getline(ifs, lineBuffer);
+
     if (ifs.eof()) {
       break;
     }
     words.push_back(lineBuffer);
     countWordsLoaded++;
   }
-  //std::cout << "Loaded " << countWordsLoaded << " words from [" << path << "]" << std::endl;;
+
   return true;
 }
 

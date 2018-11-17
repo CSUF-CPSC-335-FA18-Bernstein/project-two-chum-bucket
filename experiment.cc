@@ -24,10 +24,12 @@ int main() {
     return 1;
   }
 
+  //ofstream used to store data into a text file
   ofstream fout;
   fout.open("mergesortData.txt");
 
   int n = 99171;
+  //for loop used to run the experiment 300 times
   for (size_t i = 0; i < 300; i++)
   {
 		string_vector n_words(all_words.begin(), all_words.begin() + n);
